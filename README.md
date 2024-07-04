@@ -73,21 +73,14 @@ Verify Shell using command:
 
 File structure:
 
-bulletin_board_project/
-├── src/
-│   ├── main.c
-│   ├── server.c
-│   ├── server.h
-│   ├── sync.c
-│   ├── sync.h
-│   └── config.txt
-├── build/
-└── Makefile
 
 
+Compile: 
 
-Compile: make 
-Run : ./build/bbserv
+    - make 
+Run : 
+
+    - ./build/bbserv
 
 
 
