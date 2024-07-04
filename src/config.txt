@@ -1,0 +1,9 @@
+THMAX=6
+BBPORT=9000
+SYNCPORT=10000
+BBFILE=bulletin_board.txt
+PEER=localhost:10001
+PEER=localhost:10002
+DAEMON=true
+DEBUG=true
+DELAY=false
