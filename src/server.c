@@ -14,11 +14,11 @@ int nthreads;
 char peers[10][256];  // Array to store peer information
 int peer_count = 0;
 
-void load_config(const char *filename) {
+int load_config(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
         perror("Failed to open config file");
-        exit(1);
+        return 0; // Return 0 on failure
     }
     fscanf(file, "THMAX=%d\n", &nthreads);
     fscanf(file, "BBPORT=%d\n", &bp);
@@ -30,6 +30,7 @@ void load_config(const char *filename) {
         peer_count++;
     }
     fclose(file);
+    return 1; // Return 1 on success
 }
 
 void *client_handler(void *arg) {

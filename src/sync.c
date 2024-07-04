@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <netinet/in.h>
-#include <arpa/inet.h>  // Include this header for inet_pton
+#include <arpa/inet.h>
 #include "sync.h"
 #include "server.h"
 
@@ -76,7 +76,7 @@ void start_sync_server() {
     close(server_socket);
 }
 
-void broadcast_precommit(char *message) {
+void broadcast_precommit(const char *message) {
     for (int i = 0; i < peer_count; i++) {
         char *peer = peers[i];
         char host[256];
@@ -111,7 +111,7 @@ void broadcast_precommit(char *message) {
     }
 }
 
-void broadcast_commit(const char *message) {  // Change to accept const char*
+void broadcast_commit(const char *message) {
     for (int i = 0; i < peer_count; i++) {
         char *peer = peers[i];
         char host[256];
