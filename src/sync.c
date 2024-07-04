@@ -13,6 +13,7 @@ extern char peers[10][256];
 extern int peer_count;
 
 void *sync_handler(void *arg) {
+    printf("Handling sync connection...\n");  // Debug statement
     int sync_socket = *(int*)arg;
     free(arg);
     char buffer[1024];
@@ -35,10 +36,12 @@ void *sync_handler(void *arg) {
         }
     }
 
+    printf("Sync handler finished\n");  // Debug statement
     return NULL;
 }
 
 void start_sync_server() {
+    printf("Starting sync server...\n");  // Debug statement
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket == -1) {
         perror("Socket creation failed");
@@ -60,6 +63,8 @@ void start_sync_server() {
         exit(1);
     }
 
+    printf("Sync server listening on port %d\n", sp);  // Debug statement
+
     while (1) {
         int *sync_socket = malloc(sizeof(int));
         *sync_socket = accept(server_socket, NULL, NULL);
@@ -76,7 +81,8 @@ void start_sync_server() {
     close(server_socket);
 }
 
-void broadcast_precommit(const char *message) {
+void broadcast_precommit(char *message) {
+    printf("Broadcasting precommit message...\n");  // Debug statement
     for (int i = 0; i < peer_count; i++) {
         char *peer = peers[i];
         char host[256];
@@ -109,9 +115,11 @@ void broadcast_precommit(const char *message) {
 
         close(sock);
     }
+    printf("Precommit broadcast finished\n");  // Debug statement
 }
 
 void broadcast_commit(const char *message) {
+    printf("Broadcasting commit message...\n");  // Debug statement
     for (int i = 0; i < peer_count; i++) {
         char *peer = peers[i];
         char host[256];
@@ -144,15 +152,5 @@ void broadcast_commit(const char *message) {
 
         close(sock);
     }
-}
-
-void handle_write_request(const char *data) {
-    broadcast_precommit("precommit");
-    // Perform the write operation on the local bulletin board file
-    FILE *file = fopen("bulletin_board.txt", "a");
-    if (file) {
-        fprintf(file, "%s\n", data);
-        fclose(file);
-    }
-    broadcast_commit(data);
+    printf("Commit broadcast finished\n");  // Debug statement
 }

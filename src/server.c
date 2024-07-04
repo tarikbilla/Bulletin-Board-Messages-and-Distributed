@@ -15,25 +15,44 @@ char peers[10][256];  // Array to store peer information
 int peer_count = 0;
 
 int load_config(const char *filename) {
+    printf("Loading configuration...\n");  // Debug statement
     FILE *file = fopen(filename, "r");
     if (!file) {
         perror("Failed to open config file");
         return 0; // Return 0 on failure
     }
     fscanf(file, "THMAX=%d\n", &nthreads);
+    printf("THMAX: %d\n", nthreads);  // Debug statement
     fscanf(file, "BBPORT=%d\n", &bp);
+    printf("BBPORT: %d\n", bp);  // Debug statement
     fscanf(file, "SYNCPORT=%d\n", &sp);
+    printf("SYNCPORT: %d\n", sp);  // Debug statement
     fscanf(file, "BBFILE=%s\n", bbfile);
+    printf("BBFILE: %s\n", bbfile);  // Debug statement
     char peer_line[256];
     while (fscanf(file, "PEER=%s\n", peer_line) != EOF) {
-        strcpy(peers[peer_count], peer_line);
-        peer_count++;
+        if (peer_count < 10) {
+            strcpy(peers[peer_count], peer_line);
+            printf("PEER: %s\n", peers[peer_count]);  // Debug statement
+            peer_count++;
+        } else {
+            printf("Maximum number of peers reached. Skipping additional peers.\n");
+            break;
+        }
     }
     fclose(file);
+    printf("Configuration loaded successfully\n");  // Debug statement
     return 1; // Return 1 on success
 }
 
+void handle_write_request(const char *buffer) {
+    // Placeholder function for handling write requests
+    printf("Handling write request: %s\n", buffer);
+    // Add actual implementation later
+}
+
 void *client_handler(void *arg) {
+    printf("Handling new client connection...\n");  // Debug statement
     int client_socket = *(int*)arg;
     free(arg);
     char buffer[1024];
@@ -60,10 +79,12 @@ void *client_handler(void *arg) {
     }
 
     fclose(file);
+    printf("Client handler finished\n");  // Debug statement
     return NULL;
 }
 
 void start_client_server() {
+    printf("Starting client server...\n");  // Debug statement
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket == -1) {
         perror("Socket creation failed");
@@ -84,6 +105,8 @@ void start_client_server() {
         perror("Listening failed");
         exit(1);
     }
+
+    printf("Client server listening on port %d\n", bp);  // Debug statement
 
     while (1) {
         int *client_socket = malloc(sizeof(int));
