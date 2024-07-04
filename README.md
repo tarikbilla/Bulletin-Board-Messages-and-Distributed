@@ -1,6 +1,96 @@
 # Bulletin Board Messages and Distributed
 To complete your project successfully, you need to follow these steps:
 
+# Project Structure
+
+bulletin_board_project/
+
+├── src/
+
+│ ├── main.c
+
+│ ├── server.c
+
+│ ├── server.h
+
+│ ├── sync.c
+
+│ ├── sync.h
+
+│ └── config.txt
+
+├── build/
+
+└── Makefile
+
+#Install & Run Commands
+
+## Install And Update WSL in Window OS
+Insall WSL: 
+
+    - wsl --install
+
+Update WSL: 
+
+    -  wsl --Update
+
+Set WSL 2 as a default version: 
+
+    - wsl --set-default-version 2
+
+Open ubantoo and set user name & password
+
+ ## Install GCC (GNU Compiler Collection) in Linux Ubuntu
+    - sudo apt update
+
+    - sudo apt install build-essential
+
+## Install the WSL extension in VSCode and remote access
+Extension: Remote Development (microsoft)
+
+Open project in VSCode:
+
+    - In Visual Studio Code, press F1
+    
+    - Type "Remote-WSL: New Window" and press Enter
+
+## Install WSL and a Linux Distribution (Windows PC)
+    - dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+    - dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+## Update Package Lists and Install Essential Packages (Linux PC)
+    - sudo apt update
+
+    - sudo apt upgrade
+
+sudo apt install build-essential coreutils
+
+Verify Shell using command: 
+    - echo $SHELL
+
+## C program to develop this project
+
+File structure:
+
+bulletin_board_project/
+├── src/
+│   ├── main.c
+│   ├── server.c
+│   ├── server.h
+│   ├── sync.c
+│   ├── sync.h
+│   └── config.txt
+├── build/
+└── Makefile
+
+
+
+Compile: make 
+Run : ./build/bbserv
+
+
+
 # Project Phases and Tasks
 
 ## Phase 1: A Bulletin Board Server
