@@ -69,11 +69,11 @@ sudo apt install build-essential coreutils
 Verify Shell using command: 
     - echo $SHELL
 
-## C program to develop this project
+## Run Code
 
-File structure:
+clean objects: 
 
-
+    - make clean
 
 Compile: 
 
@@ -82,7 +82,17 @@ Run :
 
     - ./build/bbserv
 
+Open another terminal and connect to the server using telnet:
 
+    - telnet localhost 9000
+
+Test the Commands:
+Send a POST command:
+
+    - POST This is a test message
+
+Send a GET command:
+    - GET
 
 # Project Phases and Tasks
 
