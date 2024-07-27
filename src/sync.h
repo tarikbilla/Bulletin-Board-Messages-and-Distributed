@@ -1,7 +1,9 @@
 #ifndef SYNC_H
 #define SYNC_H
 
+void *sync_handler(void *arg);
 void start_sync_server();
-void handle_write_request(const char *data);
+void broadcast_precommit(char *message);
+void broadcast_commit(char *message);
 
-#endif
+#endif // SYNC_H

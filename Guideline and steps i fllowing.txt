@@ -1,0 +1,110 @@
+-----------------------------------------------------------
+Install And Update WSL in Window OS
+-----------------------------------------------------------
+Insall WSL: wsl --install
+Update WSL: wsl --Update
+Set WSL 2 as a default version: wsl --set-default-version 2
+
+Open ubantoo and set user name & password: 
+un: tarik
+ps: tarik
+
+-----------------------------------------------------------
+ Install GCC (GNU Compiler Collection) in Linux Ubuntu
+-----------------------------------------------------------
+sudo apt update
+sudo apt install build-essential
+
+-----------------------------------------------------------
+Install the WSL extension in VSCode and remote access
+-----------------------------------------------------------
+Extension: Remote Development (microsoft)
+
+Open project in VSCode:
+    - In Visual Studio Code, press F1
+    - Type "Remote-WSL: New Window" and press Enter
+
+-----------------------------------------------------------
+Install WSL and a Linux Distribution (Windows PC)
+-----------------------------------------------------------
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+-----------------------------------------------------------
+Update Package Lists and Install Essential Packages (Linux PC)
+-----------------------------------------------------------
+sudo apt update
+sudo apt upgrade
+sudo apt install build-essential coreutils
+
+Verify Shell using command: echo $SHELL
+
+-----------------------------------------------------------
+C program to develop this project
+-----------------------------------------------------------
+
+File structure:
+
+bulletin_board_project/
+├── src/
+│   ├── main.c
+│   ├── server.c
+│   ├── server.h
+│   ├── sync.c
+│   ├── sync.h
+│   └── config.txt
+├── build/
+└── Makefile
+
+
+RUN CODES:
+-------------------
+clean objects: 
+make clean
+
+Compile:
+ make 
+
+Run : 
+./build/bbserv
+
+
+
+
+-----------------------------------------------------------
+Client Run, How the Client Interacts with the Server
+-----------------------------------------------------------
+If telnet not install: 
+sudo apt-get update
+sudo apt-get install telnet
+
+
+netstat -tuln | grep 10000
+telnet localhost 10000
+nc localhost 10000
+
+
+
+WRITE This is a test message
+3.0 WROTE
+REPLACE 1 This is a replaced message
+3.0 WROTE
+READ
+USER Tarik
+
+Post a Message:
+POST This is a test message.
+
+Retrieve Messages:
+GET
+
+The server responds with the stored messages:
+Message 1: This is a test message.
+
+
+
+
+
+-----------------------------------------------------------
+
+-----------------------------------------------------------

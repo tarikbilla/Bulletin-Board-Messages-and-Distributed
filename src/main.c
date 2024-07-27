@@ -1,15 +1,21 @@
+#include <stddef.h>
+#include <pthread.h>
 #include "server.h"
 #include "sync.h"
-#include <stdio.h>
 
 int main() {
     if (!load_config("src/config.txt")) {
-        fprintf(stderr, "Failed to load configuration\n");
         return 1;
-    }else{
-        printf("loaded the config file....\n");  // Debug statement
     }
-    start_sync_server();
-    start_client_server();
+
+    pthread_t client_server_thread;
+    pthread_t sync_server_thread;
+
+    pthread_create(&client_server_thread, NULL, (void*)start_client_server, NULL);
+    pthread_create(&sync_server_thread, NULL, (void*)start_sync_server, NULL);
+
+    pthread_join(client_server_thread, NULL);
+    pthread_join(sync_server_thread, NULL);
+
     return 0;
 }

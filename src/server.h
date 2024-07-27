@@ -4,4 +4,4 @@
 int load_config(const char *filename);
 void start_client_server();
 
-#endif
+#endif // SERVER_H

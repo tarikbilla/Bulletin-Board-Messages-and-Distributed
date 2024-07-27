@@ -46,9 +46,31 @@ int load_config(const char *filename) {
 }
 
 void handle_write_request(const char *buffer) {
-    // Placeholder function for handling write requests
     printf("Handling write request: %s\n", buffer);
-    // Add actual implementation later
+    // Extract the message after the POST command
+    const char *message = buffer + 5;
+    FILE *file = fopen(bbfile, "a");
+    if (file) {
+        fprintf(file, "%s\n", message);
+        fclose(file);
+        broadcast_precommit("precommit");
+        // If all peers respond positively, broadcast commit
+        broadcast_commit("commit");
+    }
+}
+
+void handle_get_request(int client_socket) {
+    printf("Handling GET request\n");
+    char buffer[1024];
+    FILE *file = fopen(bbfile, "r");
+    if (file) {
+        while (fgets(buffer, sizeof(buffer), file)) {
+            send(client_socket, buffer, strlen(buffer), 0);
+        }
+        fclose(file);
+    } else {
+        send(client_socket, "Error reading bulletin board file\n", strlen("Error reading bulletin board file\n"), 0);
+    }
 }
 
 void *client_handler(void *arg) {
@@ -68,11 +90,11 @@ void *client_handler(void *arg) {
         }
 
         buffer[bytes_received] = '\0';
-        if (strncmp(buffer, "WRITE", 5) == 0 || strncmp(buffer, "REPLACE", 7) == 0) {
+        if (strncmp(buffer, "POST", 4) == 0) {
             handle_write_request(buffer);
             send(client_socket, "3.0 WROTE\n", strlen("3.0 WROTE\n"), 0);
-        } else if (strncmp(buffer, "USER", 4) == 0 || strncmp(buffer, "READ", 4) == 0) {
-            // Handle other requests
+        } else if (strncmp(buffer, "GET", 3) == 0) {
+            handle_get_request(client_socket);
         } else {
             send(client_socket, "Invalid command\n", strlen("Invalid command\n"), 0);
         }

@@ -118,7 +118,7 @@ void broadcast_precommit(char *message) {
     printf("Precommit broadcast finished\n");  // Debug statement
 }
 
-void broadcast_commit(const char *message) {
+void broadcast_commit(char *message) {
     printf("Broadcasting commit message...\n");  // Debug statement
     for (int i = 0; i < peer_count; i++) {
         char *peer = peers[i];
@@ -143,7 +143,7 @@ void broadcast_commit(const char *message) {
             continue;
         }
 
-        send(sock, message, strlen(message), 0);
+        send(sock, "commit", strlen("commit"), 0);
         char response[1024];
         recv(sock, response, sizeof(response), 0);
         if (strncmp(response, "negative", 8) == 0) {
