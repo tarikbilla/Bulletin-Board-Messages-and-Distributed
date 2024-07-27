@@ -28,22 +28,22 @@ bulletin_board_project/
 ## Install And Update WSL in Window OS
 Insall WSL: 
 
-    - wsl --install
+    wsl --install
 
 Update WSL: 
 
-    -  wsl --Update
+    wsl --Update
 
 Set WSL 2 as a default version: 
 
-    - wsl --set-default-version 2
+    wsl --set-default-version 2
 
 Open ubantoo and set user name & password
 
  ## Install GCC (GNU Compiler Collection) in Linux Ubuntu
-    - sudo apt update
+    sudo apt update
 
-    - sudo apt install build-essential
+    sudo apt install build-essential
 
 ## Install the WSL extension in VSCode and remote access
 Extension: Remote Development (microsoft)
@@ -60,39 +60,40 @@ Open project in VSCode:
     - dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
 ## Update Package Lists and Install Essential Packages (Linux PC)
-    - sudo apt update
+    sudo apt update
 
-    - sudo apt upgrade
+    sudo apt upgrade
 
 sudo apt install build-essential coreutils
 
 Verify Shell using command: 
-    - echo $SHELL
+    echo $SHELL
 
 ## Run Code
 
 clean objects: 
 
-    - make clean
+    make clean
 
 Compile: 
 
-    - make 
+    make 
 Run : 
 
-    - ./build/bbserv
+     ./build/bbserv
 
 Open another terminal and connect to the server using telnet:
 
-    - telnet localhost 9000
+    telnet localhost 9000
 
 Test the Commands:
 Send a POST command:
 
-    - POST This is a test message
+    POST This is a test message
 
 Send a GET command:
-    - GET
+
+    GET
 
 # Project Phases and Tasks
 
